@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wage Register</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8a6d3b">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">✎</span>
+    <div>
+      <h1>Wage Register</h1>
+      <p class="subtitle">Ledger of laborers &amp; payments</p>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="index.html" class="nav-link active">Ledger</a>
+    <a href="add-entry.html" class="nav-link">+ New Entry</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <section class="toolbar">
+    <input id="searchBox" type="text" placeholder="Search by name or code…" autocomplete="off">
+    <div class="toolbar-actions">
+      <button id="exportBtn" class="btn btn-ghost">Export to Excel (CSV)</button>
+      <label class="btn btn-ghost file-label">
+        Import from Excel (CSV)
+        <input type="file" id="importFile" accept=".csv" hidden>
+      </label>
+    </div>
+  </section>
+
+  <section class="summary-row" id="summaryRow"></section>
+
+  <section id="ledgerTableWrap">
+    <table class="ledger-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Laborer</th>
+          <th class="num">Wages Recorded</th>
+          <th class="num">Paid</th>
+          <th class="num">Balance</th>
+        </tr>
+      </thead>
+      <tbody id="ledgerBody"></tbody>
+    </table>
+    <p id="emptyState" class="empty-state" hidden>
+      No laborers yet. <a href="add-entry.html">Add your first entry</a> to begin the register.
+    </p>
+  </section>
+
+  <p class="legend">
+    <span class="legend-item"><span class="dot dot-owe"></span> We owe them (to pay)</span>
+    <span class="legend-item"><span class="dot dot-over"></span> They owe us (overpaid)</span>
+  </p>
+
+</main>
+
+<script src="app.js"></script>
+<script>
+  Ledger.renderDashboard();
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+</body>
+</html>

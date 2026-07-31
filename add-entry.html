@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Entry — Wage Register</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8a6d3b">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">✎</span>
+    <div>
+      <h1>Wage Register</h1>
+      <p class="subtitle">Add a new entry</p>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="index.html" class="nav-link">Ledger</a>
+    <a href="add-entry.html" class="nav-link active">+ New Entry</a>
+  </nav>
+</header>
+
+<main class="page page-narrow">
+
+  <form id="entryForm" class="entry-form" autocomplete="off">
+
+    <div class="field-row">
+      <div class="field">
+        <label for="codeInput">Laborer code</label>
+        <input type="text" id="codeInput" placeholder="e.g. L001" required>
+      </div>
+      <div class="field">
+        <label for="nameInput">Name</label>
+        <input type="text" id="nameInput" placeholder="Name">
+        <p id="nameHint" class="field-hint"></p>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="dateInput">Date</label>
+        <input type="date" id="dateInput" required>
+      </div>
+      <div class="field">
+        <label for="typeInput">Entry type</label>
+        <select id="typeInput">
+          <option value="wage">Wage earned (work done — increases what we owe)</option>
+          <option value="payment">Payment made (decreases what we owe)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="descInput">Description</label>
+      <input type="text" id="descInput" placeholder="e.g. Cement work, 2 days / Advance payment" required>
+    </div>
+
+    <div class="field">
+      <label for="amountInput">Amount</label>
+      <input type="number" id="amountInput" step="0.01" min="0" placeholder="0.00" required>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save entry</button>
+      <span id="saveMsg" class="save-msg"></span>
+    </div>
+  </form>
+
+</main>
+
+<script src="app.js"></script>
+<script>
+  Ledger.initAddEntry();
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laborer Details — Wage Register</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8a6d3b">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">✎</span>
+    <div>
+      <h1>Wage Register</h1>
+      <p class="subtitle">Laborer detail</p>
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="index.html" class="nav-link">Ledger</a>
+    <a href="add-entry.html" class="nav-link">+ New Entry</a>
+  </nav>
+</header>
+
+<main class="page">
+  <a href="index.html" class="back-link">← Back to ledger</a>
+
+  <section class="detail-head" id="detailHead"></section>
+
+  <section>
+    <h2 class="section-title">History</h2>
+    <table class="ledger-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th class="num">Amount</th>
+        </tr>
+      </thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+    <p id="noHistory" class="empty-state" hidden>No entries recorded yet for this laborer.</p>
+  </section>
+</main>
+
+<script src="app.js"></script>
+<script>
+  Ledger.renderDetails();
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+</body>
+</html>

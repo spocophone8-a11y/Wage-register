@@ -1,0 +1,305 @@
+/* ===== Wage Register — ledger book aesthetic ===== */
+
+@font-face { font-family: system-serif; src: local("Georgia"); }
+
+:root{
+  --paper: #f2ecdd;
+  --paper-line: #d9cdae;
+  --ink: #2b2620;
+  --ink-soft: #6b6252;
+  --brass: #8a6d3b;
+  --red: #a2372e;
+  --green: #3c6e47;
+  --card: #fbf8f0;
+  --shadow: rgba(43,38,32,0.12);
+  --radius: 4px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  background:
+    repeating-linear-gradient(180deg, transparent, transparent 31px, var(--paper-line) 32px),
+    var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  min-height:100vh;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+  padding: 22px 32px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.brand{ display:flex; align-items:center; gap:14px; }
+.brand-mark{
+  font-size: 28px;
+  color: var(--brass);
+  line-height:1;
+}
+.brand h1{
+  margin:0;
+  font-size: 22px;
+  letter-spacing: 0.03em;
+}
+.subtitle{
+  margin:2px 0 0;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+.topnav{ display:flex; gap:6px; }
+.nav-link{
+  text-decoration:none;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+}
+.nav-link:hover{ border-color: var(--paper-line); }
+.nav-link.active{
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.page{ max-width: 980px; margin: 0 auto; padding: 28px 32px 60px; }
+.page-narrow{ max-width: 620px; }
+
+.back-link{
+  display:inline-block;
+  margin-bottom: 18px;
+  color: var(--brass);
+  text-decoration:none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+.back-link:hover{ text-decoration: underline; }
+
+/* Toolbar */
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom: 20px;
+}
+#searchBox{
+  flex: 1 1 220px;
+  padding: 9px 12px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--card);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+.toolbar-actions{ display:flex; gap:8px; flex-wrap: wrap; }
+
+.btn{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  cursor:pointer;
+  border: 1px solid var(--ink);
+  background: var(--card);
+  color: var(--ink);
+}
+.btn:hover{ background: var(--ink); color: var(--paper); }
+.btn-primary{ background: var(--brass); border-color: var(--brass); color: #fff; }
+.btn-primary:hover{ background: #6f5a2f; border-color: #6f5a2f; }
+.btn-ghost{ background: transparent; }
+.file-label{ display:inline-flex; align-items:center; }
+
+/* Summary chips */
+.summary-row{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom: 22px;
+}
+.chip{
+  background: var(--card);
+  border: 1px solid var(--paper-line);
+  border-left: 4px solid var(--brass);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  min-width: 170px;
+}
+.chip .chip-label{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  display:block;
+}
+.chip .chip-value{
+  font-size: 20px;
+  font-weight:bold;
+  font-variant-numeric: tabular-nums;
+}
+.chip.chip-owe .chip-value{ color: var(--ink); }
+.chip.chip-over .chip-value{ color: var(--red); }
+
+/* Table */
+.ledger-table{
+  width:100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--ink);
+}
+.ledger-table th, .ledger-table td{
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--paper-line);
+  text-align:left;
+  font-size: 15px;
+}
+.ledger-table th{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  background: #ece3cd;
+  border-bottom: 2px solid var(--ink);
+}
+.ledger-table .num{ text-align:right; font-variant-numeric: tabular-nums; }
+.ledger-table tbody tr:hover{ background: #f5efe0; }
+.laborer-name-link{
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dotted var(--brass);
+}
+.laborer-name-link:hover{ color: var(--brass); }
+
+.balance-owe{ color: var(--ink); font-weight:bold; }
+.balance-over{ color: var(--red); font-weight:bold; }
+.balance-settled{ color: var(--ink-soft); }
+
+.type-wage{ color: var(--ink-soft); }
+.type-payment{ color: var(--green); }
+
+.empty-state{
+  text-align:center;
+  padding: 28px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.empty-state a{ color: var(--brass); }
+
+.legend{
+  margin-top: 16px;
+  display:flex;
+  gap:22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+.legend-item{ display:flex; align-items:center; gap:6px; }
+.dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+.dot-owe{ background: var(--ink); }
+.dot-over{ background: var(--red); }
+
+/* Detail head */
+.detail-head{
+  background: var(--card);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 26px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.detail-head h2{ margin: 0 0 4px; font-size: 22px; }
+.detail-head .code-tag{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.detail-balance{ text-align:right; }
+.detail-balance .chip-label{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.detail-balance .chip-value{ font-size: 24px; font-weight:bold; }
+
+.section-title{
+  font-size: 16px;
+  margin: 0 0 10px;
+  letter-spacing: 0.02em;
+}
+
+/* Form */
+.entry-form{
+  background: var(--card);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 26px;
+}
+.field-row{ display:flex; gap:18px; }
+.field-row .field{ flex:1; }
+.field{ margin-bottom: 18px; }
+.field label{
+  display:block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.field input, .field select{
+  width:100%;
+  padding: 10px 12px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: #fff;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: var(--ink);
+}
+.field-hint{
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--brass);
+  font-style: italic;
+  min-height: 16px;
+}
+.form-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-top: 6px;
+}
+.save-msg{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: var(--green);
+}
+
+@media (max-width: 640px){
+  .field-row{ flex-direction: column; gap:0; }
+  .topbar{ padding: 16px 18px; }
+  .page{ padding: 20px 16px 50px; }
+}
